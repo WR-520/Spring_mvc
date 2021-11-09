@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lingnan.dao.ScoreMapper">
+    <select id="findScoresUseIf" parameterType="map" resultType="score">
+       select * from school.score
+       <where>
+           <choose>
+              <when test="sid!=null">
+                  sid=#{sid}
+              </when>
+              <when test="cid!=null">
+                  cid=#{cid}
+              </when>
+              <otherwise>
+                  1 = 1
+              </otherwise>
+           </choose>
+       </where>
+    </select>
+<!--   增加一个成绩记录-->
+    <insert id="insertScore" parameterType="score">
+      insert into school.score values (#{cid},#{sid},#{score})
+    </insert>
+    <sql id="deleCourse">
+        <if test="cid!=null">
+           cid=#{cid}
+        </if>
+        <if test="sid!=null">
+           and sid=#{sid}
+        </if>
+    </sql>
+<!--   删除成绩记录 -->
+    <delete id="deleteScoreBySidAndCid" parameterType="map">
+        delete from school.score where sid=#{sid} and cid=#{cid}
+    </delete>
+
+<!--    根据学号和课程号修改一个成绩记录-->
+    <update id="updateScore" parameterType="map">
+      update school.score set score = #{score}
+      where sid = #{sid} and cid = #{cid}
+    </update>
+
+</mapper>

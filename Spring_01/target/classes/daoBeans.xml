@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd"
+>
+    <!--    开启注解-->
+    <context:annotation-config/>
+    <bean id="helloSpring" class="cn.edu.lingnan.test.HelloSpring">
+
+        <!--            <constructor-arg index="0" value="zhangsan111"></constructor-arg>-->
+        <!--           <property name="name" value="zhangsan"/>-->
+        <constructor-arg type="java.lang.String" value="zhangsan333"></constructor-arg>
+    </bean>
+    <bean id="studentMapperMysqlImpl" class="cn.edu.lingnan.dao.StudentMapperMysqlImpl"/>
+    <bean id="studentMapperOracleImpl" class="cn.edu.lingnan.dao.StudentMapperOracleImpl"/>
+    <bean id="studentMapperSqlServerImpl" class="cn.edu.lingnan.dao.StudentMapperSqlServerImpl"/>
+    <bean id="StudentServiceImpl" class="cn.edu.lingnan.service.StudentServiceImpl">
+        <property name="studentMapper" ref="studentMapperOracleImpl"/>
+    </bean>
+    <bean id="courseMapperMysqlImpl" class="cn.edu.lingnan.dao.CourseMapperMysqlImpl"/>
+    <bean id="courseMapperOracleImpl" class="cn.edu.lingnan.dao.CourseMapperOracleImpl"></bean>
+    <bean id="courseMapperSqlServerImpl" class="cn.edu.lingnan.dao.CourseMapperSqlServerImpl"/>
+    <bean id="CourseServiceImpl" class="cn.edu.lingnan.service.CourseServiceImpl">
+        <property name="courseMapper" ref="courseMapperSqlServerImpl"/>
+    </bean>
+    <!--    自动装配-->
+    <bean class="cn.edu.lingnan.dao.ScoreMapperMysqlImpl"></bean>
+    <bean id="ScoreServiceImpl" class="cn.edu.lingnan.service.ScoreServiceImpl"/>
+
+</beans>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="address" class="cn.edu.lingnan.pojo.Address" p:x="N87'98" p:y="S56'87"></bean>
+<!--    <bean id="address" class="cn.edu.lingnan.pojo.Address" c:x="N12'12" c:y="S98'98"/>-->
+<!--    <bean id="address" class="cn.edu.lingnan.pojo.Address">-->
+<!--        <property name="x" value="N34'23" />-->
+<!--        <property name="y" value="S45'89"/>-->
+<!--    </bean>-->
+    <bean id="student" class="cn.edu.lingnan.pojo.Student" name="s1;s2,s3">
+        <property name="name" value="zhangsan"></property>
+        <property name="address" ref="address"></property>
+    </bean>
+    <alias name="student" alias="s4"/>
+    <alias name="student" alias="s5"/>
+    <bean id="studentnew" class="cn.edu.lingnan.pojo2.StudentNew">
+        <property name="name">
+            <value>zhangsan</value>
+        </property>
+        <property name="telephone">
+            <list>
+                <value>
+                  1388989986
+                </value>
+                <value>
+                    1346465465
+                </value>
+                <value>
+                    16565465465
+                </value>
+            </list>
+        </property>
+        <property name="friends">
+            <list>
+                <value>张三</value>
+                <value>李老四</value>
+                <value>王老五</value>
+            </list>
+        </property>
+        <property name="address">
+            <map>
+                <entry key="add" value="岭南师范学院">
+                </entry>
+                <entry key="postcode" value="524048">
+                </entry>
+            </map>
+        </property>
+        <property name="game">
+            <set>
+                <value>星际争霸</value>
+                <value>英雄联盟</value>
+            </set>
+        </property>
+        <property name="informations">
+            <props>
+                <prop key="sex"> man</prop>
+                <prop key="age">21</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

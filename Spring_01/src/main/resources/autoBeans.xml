@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd"
+>
+<!--    开启注解-->
+    <context:annotation-config/>
+    <!--    byname需要保证所有bean的id唯一性 并且这个bean需要和自动注入的属性的set方法的值是一致的-->
+    <bean class="cn.edu.lingnan.auto.Student"></bean>
+    <bean class="cn.edu.lingnan.auto.Teacher"></bean>
+    <!--    自动装配-->
+    <bean id="education" class="cn.edu.lingnan.auto.Education"/>
+
+</beans>

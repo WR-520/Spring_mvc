@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+<!--    数据源配置-->
+    <context:property-placeholder location="classpath:db.properties"/>
+<!--    数据源所需要的驱动-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+       <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"></property>
+        <property name="username" value="${user}"/>
+        <property name="password" value="${password}"></property>
+    </bean>
+<!--    配置SqlSessionTemplate对象 这个也就是原来的SqlSession对象-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:cn/edu/lingnan/mapper/*.xml"></property>
+    </bean>
+<!--    下面是第一种实现方式的配置-->
+<!--    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">-->
+<!--        <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>-->
+<!--    </bean>-->
+<!--    <bean id="studentMapper" class="cn.edu.lingnan.mapper.StudentMapperMysqlImpl">-->
+<!--        <property name="sqlSessionTemplate" ref="sqlSessionTemplate"></property>-->
+<!--    </bean>-->
+    <bean id="studentMapper" class="cn.edu.lingnan.mapper.StudentMapperMysqlImpl">
+      <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="courseMapper" class="cn.edu.lingnan.mapper.CourseMapperMysqlImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="scoreMapper" class="cn.edu.lingnan.mapper.ScoreMapperMysqlImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="studentService" class="cn.edu.lingnan.service.StudentServiceMysqlImpl">
+    </bean>
+    <bean id="courseService" class="cn.edu.lingnan.service.CourseServiceMysqlImpl"></bean>
+    <bean id="scoreService" class="cn.edu.lingnan.service.ScoreServiceMysqlImpl"></bean>
+</beans>

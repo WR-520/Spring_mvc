@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+      <import resource="pojoBeans.xml"/>
+      <import resource="daoBeans.xml"/>
+      <import resource="autoBeans.xml"/>
+<!--      <bean id="helloSpring" class="HelloSpring">-->
+
+<!--&lt;!&ndash;            <constructor-arg index="0" value="zhangsan111"></constructor-arg>&ndash;&gt;-->
+<!--&lt;!&ndash;           <property name="name" value="zhangsan"/>&ndash;&gt;-->
+<!--               <constructor-arg type="java.lang.String" value="zhangsan333"></constructor-arg>-->
+<!--      </bean>-->
+<!--      <bean id="studentMapperMysqlImpl" class="StudentMapperMysqlImpl"/>-->
+<!--      <bean id="studentMapperOracleImpl" class="StudentMapperOracleImpl"/>-->
+<!--      <bean id="studentMapperSqlServerImpl" class="StudentMapperSqlServerImpl"/>-->
+<!--      <bean id="StudentServiceImpl" class="StudentServiceImpl">-->
+<!--          <property name="studentMapper" ref="studentMapperOracleImpl"/>-->
+<!--      </bean>-->
+<!--    <bean id="address" class="Address">-->
+<!--        <property name="x" value="N34'23" />-->
+<!--        <property name="y" value="S45'89"/>-->
+<!--    </bean>-->
+<!--    <bean id="student" class="Student" name="s1,s2,s3">-->
+<!--        <property name="name" value="zhangsan"></property>-->
+<!--        <property name="address" ref="address"></property>-->
+<!--    </bean>-->
+<!--    <alias name="student" alias="s4" />-->
+
+</beans>

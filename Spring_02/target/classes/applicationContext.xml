@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="beforelog" class="cn.edu.lingnan.log.BeforeLog"></bean>
+    <bean id="afterlog" class="cn.edu.lingnan.log.AfterLog"></bean>
+    <bean id="studentService" class="cn.edu.lingnan.service.StudentServiceMysqlImpl"></bean>
+    <bean id="mylog" class="cn.edu.lingnan.log.MyLog"></bean>
+    <bean id="annotationlog" class="cn.edu.lingnan.log.AnnotationLog"></bean>
+<!--    要把xx功能切入到xx方法里-->
+<!--    <aop:config>-->
+<!--&lt;!&ndash;        定义切入点 就是你要切入功能所在的方法&ndash;&gt;-->
+<!--        <aop:pointcut id="logpointcut" expression="execution(* cn.edu.lingnan..*(..)) "></aop:pointcut>-->
+<!--&lt;!&ndash;    定义通知 就是你要切入的功能类 比如日志类&ndash;&gt;-->
+<!--        <aop:advisor advice-ref="beforelog" pointcut-ref="logpointcut"/>-->
+<!--        <aop:advisor advice-ref="afterlog" pointcut-ref="logpointcut"/>-->
+<!--    </aop:config>-->
+<!--   第二种写法-->
+<!--    <aop:config>-->
+<!--&lt;!&ndash;        定义切面&ndash;&gt;-->
+<!--        <aop:aspect ref="mylog">-->
+<!--&lt;!&ndash;            定义切入点&ndash;&gt;-->
+<!--            <aop:pointcut id="logpointcut2" expression="execution(* cn.edu.lingnan..*(..))"/>-->
+<!--&lt;!&ndash;            定义通知&ndash;&gt;-->
+<!--            <aop:before method="before" pointcut-ref="logpointcut2"/>-->
+<!--            <aop:after method="after" pointcut-ref="logpointcut2"></aop:after>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+<!-- 第三种写法-->
+<!--    开启AOP的注解功能-->
+     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+</beans>

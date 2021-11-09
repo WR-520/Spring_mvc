@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lingnan.mapper.StudentMapper">
+    <select id="selectAllStudent" resultType="student">
+        select * from school.student
+    </select>
+    <delete id="deleteStudentBySid" parameterType="string">
+      delete from school.student where sid=#{sid};
+    </delete>
+    <select id="findStudentById" resultType="student" parameterType="string">
+       select * from school.student where sid = #{sid};
+    </select>
+
+    <select id="findStudentByNameUseLike" resultType="student" parameterType="string">
+       select * from school.student where sname like "%"#{sname}"%";
+    </select>
+
+    <insert id="insertStudent"  parameterType="student" >
+      insert into school.student values (#{sid},#{sname},#{password},#{superuser});
+    </insert>
+    <update id="updateStudent" parameterType="student">
+       update school.student set sname = #{sname},password = #{password},
+       superuser = #{superuser} where sid = #{sid};
+    </update>
+    <update id="updateStudentPassword" parameterType="map">
+       update school.student set password = #{password} where sid = #{sid};
+    </update>
+    <!--    动态sql的查询语句-->
+    <sql id="snamePassword">
+        <if test="sname!=null">
+            sname = #{sname}
+        </if>
+        <if test="password!=null">
+            and password = #{password}
+        </if>
+    </sql>
+
+    <select id="findStudentByNameAndPassword" parameterType="map" resultType="student">
+        --        3 trim
+        --        select * from school.student
+        <!--       <trim prefix="where" prefixOverrides="and" >-->
+        <!--          <include refid="snamePassword"></include>-->
+        <!--       </trim>-->
+        --           4 choose when otherwise
+        select * from school.student
+        <where>
+            <choose>
+                <when test="snama!=null">
+                    sname=#{sname}
+                </when>
+                <when test="password!=null">
+                    password=#{password}
+                </when>
+                <otherwise>
+                    superuser = 1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!--动态sql的查询例子 查学生-->
+    <select id="findStudentUseIf" parameterType="map" resultType="student">
+        select * from school.student
+        <where>
+            <choose>
+                <when test="snama!=null">
+                    sname=#{sname}
+                </when>
+                <when test="password!=null">
+                    password=#{password}
+                </when>
+                <otherwise>
+                    superuser = 1
+                </otherwise>
+            </choose>
+        </where>
+
+        <!--        select * from school.student where 1 = 1-->
+        <!--        <if test="sname!=null">-->
+        <!--           and  sname = #{sname}-->
+        <!--        </if>-->
+        <!--        <if test="password!=null">-->
+        <!--           and password = #{password}-->
+        <!--        </if>-->
+
+    </select>
+    <update id="updateStudentUseSet" parameterType="map">
+        update school.student
+        <set>
+            <if test="sname!=null">
+                sname=#{sname},
+            </if>
+            <if test="password!=null">
+                password=#{password},
+            </if>
+            <if test="superuser!=null">
+                superuser=#{superuser}
+            </if>
+        </set>
+        where sid=#{sid}
+    </update>
+    <select id="findStudentUseForeach" parameterType="map" resultType="student">
+        select * from school.student where
+        <foreach collection="sids" item="sidtemp" open="(" close=")" separator="or">
+            sid = #{sidtemp}
+        </foreach>
+    </select>
+</mapper>

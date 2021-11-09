@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="db.properties"/>
+    <settings>
+<!--        sql日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <!--用于指定注册别名的包，当指定后，该包下的实体类都会注册别名，并且类名就是别名，-->
+    <typeAliases>
+        <package name="cn.edu.lingnan.pojo"/>
+    </typeAliases>
+<!--    <mappers>-->
+<!--        <mapper resource="cn/edu/lingnan/mapper/StudentMapper.xml"/>-->
+<!--        <mapper class="cn.edu.lingnan.dao.StudentAutoMapper"/>-->
+<!--        <mapper class="cn.edu.lingnan.dao.CourseMapper"/>-->
+<!--        <mapper class="cn.edu.lingnan.dao.ScoreMapper"/>-->
+<!--    </mappers>-->
+</configuration>

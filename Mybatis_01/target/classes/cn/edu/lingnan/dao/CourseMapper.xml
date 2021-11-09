@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lingnan.dao.CourseMapper">
+
+<!-- 插入课程记录 -->
+    <insert id="insertCourse"  parameterType="course" >
+      insert into school.course values (#{cid},#{cname});
+    </insert>
+
+<!-- 根据ID更新课程信息 -->
+    <update id="updateCourse" parameterType="map">
+       update school.course set cname = #{cname} where cid = #{cid};
+    </update>
+
+<!--    删除一条课程记录-->
+    <delete id="deleteCourse" parameterType="string">
+        delete from school.course where cid = #{cid};
+    </delete>
+
+</mapper>
